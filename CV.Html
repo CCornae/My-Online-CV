@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CV</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Full webpage light grey background */
+        body {
+            background-color: #e9ecef; /* Light grey background for the whole webpage */
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
+
+        /* Darker grey background for the heading section */
+        .heading-bg {
+            background-color: #6c757d; /* Darker grey for heading */
+            padding: 10px; /* Reduce padding to make space smaller */
+            display: flex;
+            justify-content: center;  /* Horizontally centers content */
+            align-items: center;      /* Vertically centers content */
+            flex-direction: column;   /* Stack text vertically */
+            color: white;             /* White text for contrast */
+        }
+
+        .heading-bg h1 {
+            font-size: 3rem; /* Increase the size of the heading text */
+        }
+
+        .heading-bg p {
+            font-size: 1.2rem; /* Slightly increase subtitle text size */
+        }
+
+        /* Section Headings */
+        h3 {
+            font-size: 2rem; /* Decrease the size of the heading text */
+            margin-top: 0; /* Remove margin above section headings */
+            text-align: left; /* Align section headings to the left */
+        }
+
+        /* Section Content */
+        section p, section ul {
+            font-size: 1.25rem; /* Increase the size of paragraph and list text */
+        }
+
+        /* Fixed navigation bar at the top */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #343a40;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between; /* Space between left and right content */
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* Left side text */
+        .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        /* Right side links */
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .navbar a:hover {
+            background-color: #495057;
+            color: white;
+        }
+
+        /* Footer Navigation Bar */
+        .footer-navbar {
+            background-color: #343a40;
+            color: white;
+            padding: 15px 0; /* Increase padding for a bigger footer bar */
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 1.25rem; /* Increase font size for footer text */
+        }
+
+        .footer-navbar .container {
+            display: flex;
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Center items vertically */
+        }
+
+        /* Add padding to avoid content being hidden behind the navbar */
+        section {
+            padding-top: 70px; /* Padding to bring content below navbar */
+        }
+
+        /* Additional spacing */
+        #about-me {
+            margin: 0; /* Remove gap above About Me */
+        }
+        #skills, #education, #my-works, #contact-me {
+            margin: 0; /* Remove gap between other sections */
+            padding: 20px 0; /* Optional padding for better spacing inside sections */
+        }
+
+        /* Center the image */
+        .about-me-image {
+            display: block; /* Center block element */
+            margin: 20px auto; /* Center horizontally with top margin */
+            max-width: 200px; /* Adjust the max width */
+            border-radius: 50%; /* Make it a circle */
+        }
+
+        /* Centered text */
+        .text-center {
+            text-align: center; /* Center text */
+        }
+
+        /* Background colors for sections */
+        #about-me {
+            background-color: white; /* White background for About Me */
+        }
+        #skills {
+            background-color: #f8f9fa; /* Light grey background for Skills */
+        }
+        #education {
+            background-color: white; /* White background for Education */
+        }
+        #my-works {
+            background-color: #f8f9fa; /* Light grey background for My Works */
+        }
+        #contact-me {
+            background-color: white; /* White background for Contact Me */
+            padding-bottom: 40px; /* Gap below Contact Me section */
+        }
+
+        /* My Works Section Styles */
+        #my-works {
+            padding: 20px; /* Add padding for spacing */
+        }
+
+        .work-item {
+            margin-bottom: 20px; /* Add gap between each work item */
+            background-color: #f0f0f0; /* Slightly darker background color */
+            padding: 15px; /* Add padding to the work item for better spacing */
+            border-radius: 5px; /* Optional: Add rounded corners */
+        }
+
+        .work-title {
+            font-size: 1.5em; /* Increase header text size */
+            margin-bottom: 10px; /* Add some space below the header */
+        }
+
+        .work-image {
+            width: 500px; /* Set a fixed width for all images */
+            height: 350px; /* Set a fixed height for all images */
+            object-fit: cover; /* Maintain aspect ratio and cover the area */
+            display: block; /* Ensure image is displayed as block element */
+            margin: 0 auto 10px; /* Center image and add margin below */
+        }
+
+        /* Equal width for footer items */
+        .footer-item {
+            flex: 1; /* Makes each item take equal space */
+            text-align: center; /* Centers the text */
+        }
+
+        /* Contact Form */
+        .contact-form .form-control {
+            font-size: 1.5rem; /* Increase the font size of input fields */
+            padding: 15px; /* Increase padding for a bigger look */
+        }
+
+        .contact-form .form-label {
+            font-size: 1.3rem; /* Increase the font size of labels */
+        }
+
+        /* Center the contact form */
+        #contact-me {
+            text-align: center; /* Center align the entire Contact Me section */
+        }
+
+        /* Style for form groups to be in the same row */
+        .form-row {
+            display: flex; /* Use flexbox for rows */
+            justify-content: space-between; /* Space between fields */
+        }
+
+        .form-row .form-group {
+            flex: 1; /* Equal width for each input */
+            margin-right: 10px; /* Right margin for spacing */
+        }
+
+        .form-row .form-group:last-child {
+            margin-right: 0; /* Remove margin for last item */
+        }
+
+        /* Style for the submit button */
+        .contact-form button {
+            font-size: 1.5rem; /* Increase the font size of the button */
+            padding: 15px 30px; /* Increase padding for a bigger button */
+            margin-top: 20px; /* Gap above the button */
+            margin-bottom: 20px; /* Gap below the button */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Left Side Text -->
+        <a href="#" class="navbar-brand">My Online CV</a>
+        
+        <!-- Right Side Hotkey Buttons -->
+        <div>
+            <a href="#about-me">About Me</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#my-works">My Works</a>
+            <a href="#contact-me">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- CV Section -->
+    <div class="container my-5">
+        <!-- About Me Section -->
+        <section id="about-me">
+            <div class="heading-bg">
+                <h1>Chotiphat Chaijamroonphan</h1>
+                <p>3D Programmer | Technical Artist</p>
+            </div>
+            <h3>About Me</h3>
+            <img src="CC.jpg" alt="Chotiphat Chaijamroonphan" class="about-me-image">
+            <p class="text-center">
+                Recently, I am a 3rd year student in the College of Arts, Media and Technology at Chiang Mai University.<br>
+                I love to learn new things from this establishment.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h3>Skills</h3>
+            <ul class="list-unstyled">
+                <li class="mb-3">
+                    <strong>Coding:</strong> I possess strong logical skills, particularly in game development, which encompasses mathematics and physics. My programming knowledge enables me to create efficient solutions for complex challenges.
+                </li>
+                <li class="mb-3">
+                    <strong>Game Engine:</strong> I am proficient in both Unreal Engine and Unity Engine, with a particular mastery of Unreal Engine. My experience allows me to leverage the strengths of each engine effectively in various projects.
+                </li>
+                <li class="mb-3">
+                    <strong>3D Art:</strong> I have a keen eye for aesthetics, especially in 3D design. I am proficient in modeling both 3D objects and humanoid characters, ensuring attention to detail and visual appeal.
+                </li>
+                <li class="mb-3">
+                    <strong>Rigging:</strong> I have solid rigging skills, enabling me to create animations, particularly for humanoid models. Additionally, I can rig Live2D models for use in VTubing applications, expanding my versatility in animation.
+                </li>
+                <li class="mb-3">
+                    <strong>Communication:</strong> I possess strong communication skills, allowing me to effectively facilitate teamwork. I am adept at serving as a liaison between the development and artistic teams, ensuring smooth collaboration and project success.
+                </li>
+            </ul>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h3>Education</h3>
+            <p>
+                Chiang Mai University | Bachelor's Degree in Digital Game | Year: Present
+            </p>
+            <p>
+                My academic journey at Chiang Mai University has provided me with a robust and comprehensive foundation in the field of game development. Throughout my studies, I have not only honed my programming skills in both Unity and Unreal Engine, but I have also explored the intricate elements of design and 3D art. This multifaceted approach has allowed me to appreciate the artistry behind game creation as much as the technical challenges.
+            </p>
+            <p>
+                In addition to my coursework, I actively engaged in various extracurricular activities that significantly contributed to my professional growth. These experiences enabled me to deepen my expertise in Unreal Engine and to acquire valuable insights into technical aspects of 3D art, including rigging. I believe that these practical experiences have equipped me with a well-rounded skill set that prepares me for the dynamic and ever-evolving landscape of game development.
+            </p>
+        </section>
+
+        <!-- My Works Section -->
+        <section id="my-works">
+            <h3>My Works</h3>
+            <div class="work-item">
+                <h4 class="work-title">Game: Freikompanie</h4>
+                <img src="FreiPic.png" alt="Freikompanie" class="work-image">
+                <p>
+                    In this project, I served as a 2D artist, contributing to the game's pixel art style. My responsibilities included creating all visual assets and animating various elements within the game. Additionally, I utilized specialized tools to rig 2D pixel art, ensuring smooth and dynamic animations.
+                </p>
+            </div>
+        
+            <div class="work-item">
+                <h4 class="work-title">Game: John Wick Inspired</h4>
+                <img src="RiflePoseV1.png" alt="John Wick Inspired" class="work-image">
+                <p>
+                    As a technical artist for this game, my role involved rigging humanoid characters and various objects, including rifles and pistols. I was responsible for animating all character movements and assisting the programming team with technical aspects to ensure that animations seamlessly integrated with the game code.
+                </p>
+            </div>
+        
+            <div class="work-item">
+                <h4 class="work-title">My Android App</h4>
+                <img src="3DApp.png" alt="My Android App" class="work-image">
+                <p>
+                    I developed a personal project that allows users to dress and customize their characters within an Android application. This app showcases my ability to blend creativity and technical skills in a practical setting.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Me Section -->
+        <section id="contact-me" class="contact-form">
+            <h3>Contact Me</h3>
+            <form>
+                <div class="form-row">
+                    <div class="form-group mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" required>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-navbar">
+        <div class="container">
+            <div class="footer-item">Phone: (+66)64 1634626</div>
+            <div class="footer-item">Email: anosaranz@gmail.com</div>
+            <div class="footer-item">Address: Chang Phueak, Muang Chiang Mai, Chiang Mai, 50300</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
